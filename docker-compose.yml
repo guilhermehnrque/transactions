@@ -1,0 +1,43 @@
+version: "3.4"
+
+services:
+  db:
+    container_name: "transactions.db"
+    image: mysql:8.0.29
+    ports:
+      - "3306:3306"
+    volumes:
+      #- "./db:/var/lib/mysql"
+      - db:/var/lib/mysql 
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - transactions
+
+  app:
+    container_name: "transactions.app"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - "./src:/var/www/html/public"
+      - "./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf"
+      - .:/src:delegated
+      - ~/.composer:/home/root/.composer:delegated
+    networks:
+      - transactions
+
+volumes:
+  db:
+
+
+networks:
+  transactions:
+    external: true
