@@ -3,11 +3,7 @@
 namespace Tests\Unit\Repository;
 
 use App\Models\Transaction;
-use App\Models\User;
-use App\Models\Wallet;
 use App\Repositories\TransactionsRepository;
-use App\Repositories\UserRepository;
-use App\Repositories\WalletRepository;
 use Mockery;
 use Mockery\LegacyMockInterface;
 use Tests\TestCase;

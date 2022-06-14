@@ -18,8 +18,13 @@ class UserRepository
         return $this->user->create($attributes);
     }
 
-    public function get(int $id)
+    public function getById(int $id)
     {
         return $this->user->find($id);
+    }
+
+    public function getUserByCPForCNPJ(int $cpfCnpj)
+    {
+        return $this->user->where('cpf_cnpj', $cpfCnpj)->get();
     }
 }

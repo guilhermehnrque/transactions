@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Crypt;
 class User extends Model
 {
     protected $hidden = ['password'];
-    
+
     protected $table = 'users';
 
     protected $fillable = [

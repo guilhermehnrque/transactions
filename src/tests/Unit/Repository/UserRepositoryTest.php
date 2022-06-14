@@ -54,7 +54,33 @@ class UserRepositoryTest extends TestCase
             ]));
 
         $repository = new UserRepository($this->modelMock);
-        $response = $repository->get($userId);
+        $response = $repository->getById($userId);
+
+        self::assertInstanceOf(User::class, $response);
+    }
+
+    public function test_should_get_user_by_cpf_or_cnpj()
+    {
+        $cpfCnpj = 1;
+
+        $this->modelMock->shouldReceive('where')
+            ->withArgs(['cpf_cnpj', $cpfCnpj])
+            ->once()
+            ->andReturnSelf();
+
+        $this->modelMock->shouldReceive('get')
+            ->withNoArgs()
+            ->once()
+            ->andReturn(new User([
+                    'id' => 1,
+                    'name' => 'Guiro',
+                    'email' => 'guiro@guiro.com',
+                    'type' => 'lojista'
+                ])
+            );
+
+        $repository = new UserRepository($this->modelMock);
+        $response = $repository->getUserByCPForCNPJ($cpfCnpj);
 
         self::assertInstanceOf(User::class, $response);
     }
