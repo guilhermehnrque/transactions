@@ -4,3 +4,4 @@
 /srcHomestead.yaml
 /src.env
 /src.phpunit.result.cache
+/src/coverage

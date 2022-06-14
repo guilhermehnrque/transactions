@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Wallet;
 
-class Transfer extends Model
+class Transaction extends Model
 {
     protected $table = 'transactions';
 

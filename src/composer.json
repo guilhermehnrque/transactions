@@ -11,7 +11,8 @@
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.4",
-        "phpunit/phpunit": "^9.5.10"
+        "phpunit/phpunit": "^9.5.10",
+        "phpunit/php-code-coverage": "^9.2.15"
     },
     "autoload": {
         "psr-4": {
@@ -28,6 +29,13 @@
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "test": [
+            "[ ! -f storage/database.sqlite ] && composer create-database-sqlite  true",
+            "phpunit --configuration phpunit.xml"
+        ],
+        "test-coverage": [
+           "XDEBUG_MODE=coverage phpunit --coverage-html coverage --configuration phpunit.xml -v"
         ]
     },
     "config": {
